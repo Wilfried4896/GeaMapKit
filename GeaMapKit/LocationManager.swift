@@ -27,36 +27,6 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
     }
-//
-//    func getAdress(coord: CLLocation, completionHandler: @escaping (String?, String?) -> Void) {
-//        let geocoder = CLGeocoder()
-//
-//        geocoder.reverseGeocodeLocation(coord) { placemark, error in
-//            guard let place = placemark?.first, error == nil else {
-//                completionHandler(nil, nil)
-//                return
-//            }
-//
-//            var name = ""
-//            var subName = ""
-//            if let thoroughfare = place.thoroughfare {
-//                name += "\(thoroughfare) "
-//            }
-//            if let subThoroughfare = place.subThoroughfare {
-//                name += "\(subThoroughfare), "
-//            }
-//            if let location = place.locality {
-//                name += "\(location) "
-//            }
-//            if let postalCode = place.postalCode {
-//                subName += "\(postalCode), "
-//            }
-//            if let country = place.country {
-//                subName += "\(country)"
-//            }
-//            completionHandler(name, subName)
-//        }
-//    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else { return }

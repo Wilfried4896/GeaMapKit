@@ -40,13 +40,13 @@ class ViewController: UIViewController {
         view.addSubview(searchView)
         
         LocationManager.shared.getUserLocation {[weak self] location in
-            guard let self else { return }
-            
+            guard let self else {
+                print("error location")
+                return }
             DispatchQueue.main.async {
             self.locationUser = location
-            print(self.locationUser!)
-            let pin = MKPointAnnotation()
-            pin.coordinate = location.coordinate
+            //print(location)
+            let pin = Artwork(coordinate: location.coordinate, title: "Моя позиция", subtitle: nil)
             self.mapKitView.centerToLocation(location)
             self.mapKitView.addAnnotation(pin)
         }
@@ -115,6 +115,7 @@ extension ViewController: MKMapViewDelegate {
             view = dequeuedView
         } else {
             view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            
             view.canShowCallout = true
             view.calloutOffset = CGPoint(x: -5, y:  5)
             view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
